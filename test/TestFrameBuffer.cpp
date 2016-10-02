@@ -19,12 +19,21 @@ int teardown() {
 //TODO Add debug data to frame in frame buffer
 //TODO Frame buffer overflow
 //TODO Ask for a frame that's not added
+//TODO Clean up. How owns the image handle pointer?
 void testAddImageToFrameInFrameBuffer() {
 	FrameBuffer frameBuffer;
 	ImageHandle* imageHandle = new ImageHandle();
 	uint64_t frameNumber = 0;
-	CU_ASSERT_EQUAL(FrameBuffer::OK, frameBuffer.AddImageToFrame(frameNumber, imageHandle));
-	CU_ASSERT_PTR_EQUAL(imageHandle, frameBuffer.getFrame(frameNumber).getImageHandle());
+	CU_ASSERT_EQUAL(FrameBuffer::OK, frameBuffer.addImageToFrame(frameNumber, imageHandle));
+	//CU_ASSERT_PTR_EQUAL(imageHandle, frameBuffer.getFrame(frameNumber).getImageHandle());
+}
+
+void testToAddSeveralFrames() {
+	FrameBuffer frameBuffer;
+	frameBuffer.addImageToFrame(0, new ImageHandle());
+	frameBuffer.addImageToFrame(1, new ImageHandle());
+	CU_ASSERT_NOT_EQUAL(frameBuffer.getFrame(0), frameBuffer.getFrame(1));
+	CU_ASSERT_EQUAL(frameBuffer.getFrame(0), frameBuffer.getFrame(0));
 }
 
 int main()
@@ -40,7 +49,8 @@ int main()
       return CU_get_error();
    }
 
-   if (NULL == CU_add_test(suite, "Add image to frame in frame buffer", testAddImageToFrameInFrameBuffer)) {
+   if ((NULL == CU_add_test(suite, "Add image to frame in frame buffer", testAddImageToFrameInFrameBuffer)) ||
+		   (NULL == CU_add_test(suite, "Add several frames to frame buffer", testToAddSeveralFrames))) {
       CU_cleanup_registry();
       return CU_get_error();
    }

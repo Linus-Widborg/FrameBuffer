@@ -15,9 +15,12 @@ public:
 	Frame(ImageHandle* imageHandle);
 	virtual ~Frame();
 	ImageHandle* getImageHandle();
+	void addImageHandle(ImageHandle* imageHandle);
 
 private:
 	ImageHandle* m_ImageHandle;
 };
 
+bool operator==(const Frame& lhs, const Frame& rhs);
+bool operator!=(const Frame& lhs, const Frame& rhs);
 #endif /* FRAME_H_ */

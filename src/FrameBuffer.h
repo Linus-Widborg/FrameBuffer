@@ -20,10 +20,10 @@ public:
 
 	FrameBuffer();
 	virtual ~FrameBuffer();
-	result AddImageToFrame(uint64_t frameNumber, ImageHandle* imageHandle);
+	result addImageToFrame(uint64_t frameNumber, ImageHandle* imageHandle);
 	Frame getFrame(uint64_t frameNumber);
 
 private:
-	Frame m_Frame;
+	Frame m_Frame[2] = {Frame(), Frame()};
 };
 #endif /* FRAMEBUFFER_H_ */

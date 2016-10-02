@@ -15,12 +15,12 @@ FrameBuffer::~FrameBuffer() {
 	//Empty
 }
 
-FrameBuffer::result FrameBuffer::AddImageToFrame(uint64_t frameNumber,
+FrameBuffer::result FrameBuffer::addImageToFrame(uint64_t frameNumber,
 												 ImageHandle* imageHandle) {
-	m_Frame = Frame(imageHandle);
+	m_Frame[frameNumber].addImageHandle(imageHandle);
 	return OK;
 }
 
 Frame FrameBuffer::getFrame(uint64_t frameNumber) {
-	return m_Frame;
+	return m_Frame[frameNumber];
 }
