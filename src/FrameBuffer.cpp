@@ -21,6 +21,6 @@ FrameBuffer::result FrameBuffer::addImageToFrame(uint64_t frameNumber,
 	return OK;
 }
 
-Frame FrameBuffer::getFrame(uint64_t frameNumber) {
+Frame& FrameBuffer::getFrame(uint64_t frameNumber) {
 	return m_Frame[frameNumber];
 }

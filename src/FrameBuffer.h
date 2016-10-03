@@ -21,7 +21,7 @@ public:
 	FrameBuffer();
 	virtual ~FrameBuffer();
 	result addImageToFrame(uint64_t frameNumber, ImageHandle* imageHandle);
-	Frame getFrame(uint64_t frameNumber);
+	Frame& getFrame(uint64_t frameNumber);
 
 private:
 	Frame m_Frame[2] = {Frame(), Frame()};

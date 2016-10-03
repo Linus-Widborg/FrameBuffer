@@ -15,17 +15,17 @@ int teardown() {
 	return 0;
 }
 //TODO Frame created in AddImageToFrame
-//TODO Add several frames
 //TODO Add debug data to frame in frame buffer
 //TODO Frame buffer overflow
 //TODO Ask for a frame that's not added
 //TODO Clean up. How owns the image handle pointer?
+//TODO Constness
 void testAddImageToFrameInFrameBuffer() {
 	FrameBuffer frameBuffer;
 	ImageHandle* imageHandle = new ImageHandle();
 	uint64_t frameNumber = 0;
 	CU_ASSERT_EQUAL(FrameBuffer::OK, frameBuffer.addImageToFrame(frameNumber, imageHandle));
-	//CU_ASSERT_PTR_EQUAL(imageHandle, frameBuffer.getFrame(frameNumber).getImageHandle());
+	CU_ASSERT_PTR_EQUAL(imageHandle, frameBuffer.getFrame(frameNumber).getImageHandle());
 }
 
 void testToAddSeveralFrames() {
