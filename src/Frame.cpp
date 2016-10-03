@@ -25,6 +25,7 @@ ImageHandle* Frame::getImageHandle() {
 }
 
 bool operator==(const Frame& lhs,const Frame& rhs) {
+	//fprintf(stderr, "LIZ: %p == %p\n", &lhs, &rhs);
 	return &lhs == &rhs;
 }
 

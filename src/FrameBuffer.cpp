@@ -15,12 +15,14 @@ FrameBuffer::~FrameBuffer() {
 	//Empty
 }
 
-FrameBuffer::result FrameBuffer::addImageToFrame(uint64_t frameNumber,
-												 ImageHandle* imageHandle) {
-	m_Frame[frameNumber].addImageHandle(imageHandle);
+#include <stdio.h>
+FrameBuffer::result FrameBuffer::addFrame(uint64_t frameNumber,
+										  Frame& frame) {
+	m_FrameBuffer[frameNumber] = frame;
 	return OK;
 }
 
 Frame& FrameBuffer::getFrame(uint64_t frameNumber) {
-	return m_Frame[frameNumber];
+	//fprintf(stderr, "LIZ: getFrame %p\n", &m_FrameBuffer[frameNumber]);
+	return m_FrameBuffer[frameNumber];
 }
