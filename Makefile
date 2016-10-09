@@ -13,10 +13,11 @@ all:	$(TARGET)
 
 TESTDIR = test
 TEST_TARGET =	$(TESTDIR)/TestFrameBuffer
-TEST_OBJS = $(TESTDIR)/TestFrameBuffer.o
+TEST_MAIN = $(TESTDIR)/TestMain.o
+TEST_OBJS = $(TESTDIR)/TestFrameBuffer.o $(TESTDIR)/TestFrame.o 
 TEST_LIBS = -lcunit
-$(TEST_TARGET):	$(TEST_OBJS) $(OBJS)
-	$(CXX) -o $(TEST_TARGET) $(TEST_OBJS) $(OBJS) $(TEST_LIBS)
+$(TEST_TARGET):	$(TEST_MAIN) $(TEST_OBJS) $(OBJS)
+	$(CXX) -o $(TEST_TARGET) $(TEST_MAIN) $(TEST_OBJS) $(OBJS) $(TEST_LIBS)
 	
 test:	$(TEST_TARGET)
 

@@ -10,20 +10,27 @@
 #include "ImageHandle.h"
 #include "Frame.h"
 #include <stdint.h>
+#include <vector>
+#include <stdexcept>
 
+struct DebugData {
+	uint8_t size;
+	void* data;
+};
 class FrameBuffer {
 public:
-	enum result {
-		NOT_OK = 0,
-		OK = 1
-	};
-
-	FrameBuffer();
+	FrameBuffer(const uint64_t size);
 	virtual ~FrameBuffer();
-	result addFrame(uint64_t frameNumber, Frame& frame);
-	Frame& getFrame(uint64_t frameNumber);
+	uint64_t size();
+
+	void insertImage(ImageHandle* imageHandle);
+	void insertDebugData(const uint64_t slot, DebugData debugData);
+
+	DebugData getDebugData(const uint64_t slot);
 
 private:
-	Frame m_FrameBuffer[2];
+	const uint64_t m_Size;
+	std::vector<DebugData> m_DebugData;
+	uint64_t m_FirstSlot;
 };
 #endif /* FRAMEBUFFER_H_ */
